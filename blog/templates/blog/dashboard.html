@@ -1,0 +1,83 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}DashBoard{% endblock title %}
+
+{% block msg %}
+<!-- Messages -->
+{% if messages %}
+{% for msgs in messages %}
+    <div {% if msgs.tags %} 
+        class="alert alert-{{ msgs.tags }} alert-dismissible fade show" 
+        {% endif %}>{{ msgs }}
+        <button 
+            type="button" 
+            class="close" 
+            data-dismiss="alert"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+{% endif %} 
+{% endblock msg %}
+
+{% block side %}
+<div class="col-md-2 my-4 text-center">
+    <div class="card">
+        <div class="card-header p-1">
+            <h4 class="my-4"><i class="fa-solid fa-user"></i> Profile</h4>
+        </div>
+        <div class="card-body p-1 bg-light">
+            <h5>{{ full_name }}</h5>
+        </div>
+        <div class="card-footer p-1">
+            {% for group in groups %}
+                <p class="lead">{{ group.name }}</p>
+            {% endfor %}
+        </div>
+    </div>
+   
+</div>
+{% endblock side %}
+
+{% block content %}
+    <div class="col-md-10">
+        <h3 class="my-4"><i class="fa-solid fa-layer-group"></i> DashBoard Page</h3>
+        <a href="{% url 'addpost' %}" class="btn btn-success">Add Post</a>
+        <h4 class="text-center alert alert-info mt-3">
+            Post's Information
+        </h4>
+        {% if posts %}
+        <table class="table table-hover bg-light peach-gradient">
+            <thead class="bg-dark text-white">
+                <tr class="text-center">
+                    <th scope="col" style="width:2%;">ID</th>
+                    <th scope="col" style="width:28%;">Title</th>
+                    <th scope="col" style="width:55%;">Description</th>
+                    <th scope="col" style="width:15%;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <th scope="row">{{ post.id }}</th>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.desc|truncatewords:'25' }}</td>
+                        <td class="text-center"> 
+                            <a href="{% url 'updatepost' post.id %}" class="btn btn-warning btn-sm text-dark">Edit</a>
+
+                            <!-- Delete Permission only for admin -->
+                            {% if perms.blog.delete_post %}
+                                <form action="{% url 'deletepost' post.id %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm text-white">
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+{% endblock content %}

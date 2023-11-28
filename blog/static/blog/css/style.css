@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Oregano&family=Poppins&family=Rock+Salt&family=Shadows+Into+Light+Two&display=swap');
+/* font-family: 'Poppins', sans-serif;
+font-family: 'Rock Salt', cursive;
+font-family: 'Oregano', cursive;
+font-family: 'Shadows Into Light Two', cursive; */
+*{
+    transition: all .5s linear 0s;
+}
+
+body{
+    background: linear-gradient(to right, #2196f3, #f44336); 
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Alert */
+.alert{
+    outline: none;
+    border: none;
+}
+.alert-success{
+    background-color: #32ff1a69;
+    color: black;
+}
+.info{
+    background-color: #1288ff;
+    color: black;
+}
+.warning{
+    background-color: #ff9a15;
+    color: black;
+}
+.error{
+    background-color: #ff2525;
+    color: white;
+}
+
+/* Navbar */
+.navbar-brand{
+    font-family: 'Rock Salt', cursive;
+    padding: 0 50px;
+    font-size: 1.7em;
+}
+.nav-item{
+    margin-right: 10px;
+}
+
+/* Blogs */
+.jumbo-color{
+    background: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+}
+.lead{
+    font-family: 'Shadows Into Light Two', cursive;
+    /* font-size: 1.7em; */
+    /* font-weight: 500; */
+}
+
